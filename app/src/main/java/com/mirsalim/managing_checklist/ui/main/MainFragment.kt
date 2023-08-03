@@ -16,6 +16,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
     private val adapter = FruitAdapter{
         viewModel.updateList(it)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setRv()
@@ -40,6 +41,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
     private fun initObservers(){
         viewModel.fruitList.observe(viewLifecycleOwner){
             adapter.submitList(it)
+            adapter.notifyDataSetChanged()
         }
 
         viewModel.fruitsListText.observe(viewLifecycleOwner){

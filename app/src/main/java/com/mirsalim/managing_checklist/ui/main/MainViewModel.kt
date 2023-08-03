@@ -12,7 +12,7 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(): ViewModel() {
 
     //apple, banana, pineapple, orange, grapefruit
-    private val _fruitList = MutableLiveData<List<Fruit>>(
+    private val _fruitList = MutableLiveData(
         listOf(
             Fruit(name = "apple"),
             Fruit(name = "banana"),
@@ -36,18 +36,13 @@ class MainViewModel @Inject constructor(): ViewModel() {
             if(item.isChecked)
                 text+="${item.name}, "
         }
-
         text
     }
 
     val fruitList: LiveData<List<Fruit>> = _fruitList
 
     fun updateList(item: Fruit){
-        val fruits = fruitList.value!!.toMutableList().map {
-            val newItem = it.copy(it.isChecked, it.name)
-            newItem
-        }
-
+        val fruits = fruitList.value!!.toMutableList()
         val updatedFruits = fruits.map {
             if (it.name == item.name){
                 it.isChecked = item.isChecked
@@ -59,10 +54,7 @@ class MainViewModel @Inject constructor(): ViewModel() {
     }
 
     fun checkAll(isChecked: Boolean){
-        val fruits = fruitList.value!!.toMutableList().map {
-            val newItem = it.copy(it.isChecked, it.name)
-            newItem
-        }
+        val fruits = fruitList.value!!.toMutableList()
         fruits.map {
             it.isChecked = isChecked
         }
@@ -70,10 +62,7 @@ class MainViewModel @Inject constructor(): ViewModel() {
     }
 
     fun unCheckAll(){
-        val fruits = fruitList.value!!.toMutableList().map {
-            val newItem = it.copy(it.isChecked, it.name)
-            newItem
-        }
+        val fruits = fruitList.value!!.toMutableList()
         fruits.map {
             it.isChecked = false
         }

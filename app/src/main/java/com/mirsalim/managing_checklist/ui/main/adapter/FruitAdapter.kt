@@ -18,8 +18,7 @@ class FruitAdapter(val itemChecked:(Fruit)->Unit): ListAdapter<Fruit, FruitAdapt
         }
     }
 ){
-
-    inner class FruitHolder(val binding: ItemFuitBinding): RecyclerView.ViewHolder(binding.root){
+    inner class FruitHolder(private val binding: ItemFuitBinding): RecyclerView.ViewHolder(binding.root){
         fun display(data:Fruit){
             binding.fruitItem.text = data.name
             binding.fruitItem.isChecked = data.isChecked
